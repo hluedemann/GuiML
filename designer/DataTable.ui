@@ -18,6 +18,30 @@
     <widget class="QTableView" name="tableData"/>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="Feature">
+       <property name="text">
+        <string>Feature</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBoxFeature"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelFilter">
+       <property name="text">
+        <string>Filter</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditFilter"/>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QTableView" name="tableDataDescription"/>
    </item>
   </layout>

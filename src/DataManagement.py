@@ -30,6 +30,7 @@ class DataTable(QWidget,Ui_DataTable,QtCore.QObject):
     def __init__(self,parent=None):
         super(DataTable,self).__init__(parent)
         self.setupUi(self)
+        self.tableData.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
 class DataTableModel(QtCore.QAbstractTableModel):
     def __init__(self, data, parent=None):
@@ -60,11 +61,22 @@ class DataTableModel(QtCore.QAbstractTableModel):
 class DataOverview():
     def __init__(self,m_filepath):
         self.m_data = Data(m_filepath)
+        self.setupTable()
+
+    def setupTable(self):
         self.m_dataTable = DataTable()
         self.m_dataTableModel = DataTableModel(self.m_data)
-        self.m_dataTable.tableData.setModel(self.m_dataTableModel)
-        self.m_dataTable.tableData.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.m_proxyModel = QtCore.QSortFilterProxyModel()
+        self.m_proxyModel.setSourceModel(self.m_dataTableModel)
+        self.m_dataTable.tableData.setModel(self.m_proxyModel)
+        self.m_dataTable.tableData.setSortingEnabled(True)
+        for column in self.m_data.getColumns():
+            self.m_dataTable.comboBoxFeature.addItem(column)
+        self.m_dataTable.lineEditFilter.textChanged.connect(self.on_lineEditFilterChanged)
 
+    def on_lineEditFilterChanged(self,string):
+        self.m_proxyModel.setFilterRegExp(QtCore.QRegExp(string,QtCore.Qt.CaseInsensitive, QtCore.QRegExp.FixedString))
+        self.m_proxyModel.setFilterKeyColumn(self.m_dataTable.comboBoxFeature.currentIndex())
 
     def getDataTable(self):
         return self.m_dataTable
