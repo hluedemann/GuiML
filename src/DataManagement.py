@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QHeaderView
 
 from DataTable import Ui_DataTable
 
@@ -63,6 +63,7 @@ class DataOverview():
         self.m_dataTable = DataTable()
         self.m_dataTableModel = DataTableModel(self.m_data)
         self.m_dataTable.tableData.setModel(self.m_dataTableModel)
+        self.m_dataTable.tableData.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
 
     def getDataTable(self):
