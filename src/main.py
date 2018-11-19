@@ -12,6 +12,8 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 #GuiML
 from MainWindow import Ui_MainWindow
 from DataManagement import DataOverview
+from DataPlot import DataPlot
+
 
 class MainWindow(QMainWindow, Ui_MainWindow, QtCore.QObject):
     def __init__(self,parent=None):
@@ -29,6 +31,8 @@ class MainWindow(QMainWindow, Ui_MainWindow, QtCore.QObject):
         if fileName:
             self.dataOverview = DataOverview(fileName)
             self.MainTabWidget.addTab(self.dataOverview.getDataTable(),self.dataOverview.getData().getFilename())
+            dataPlot = DataPlot(self.dataOverview.getData())
+            self.MainTabWidget.addTab(dataPlot,'Plot')
 
 
 # create the GUI application

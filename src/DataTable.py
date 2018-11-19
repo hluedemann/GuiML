@@ -11,10 +11,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DataTable(object):
     def setupUi(self, DataTable):
         DataTable.setObjectName("DataTable")
-        DataTable.resize(400, 300)
+        DataTable.resize(400, 443)
         self.verticalLayout = QtWidgets.QVBoxLayout(DataTable)
         self.verticalLayout.setObjectName("verticalLayout")
         self.tableData = QtWidgets.QTableView(DataTable)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tableData.sizePolicy().hasHeightForWidth())
+        self.tableData.setSizePolicy(sizePolicy)
         self.tableData.setObjectName("tableData")
         self.verticalLayout.addWidget(self.tableData)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -33,6 +38,11 @@ class Ui_DataTable(object):
         self.horizontalLayout.addWidget(self.lineEditFilter)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableDataDescription = QtWidgets.QTableView(DataTable)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tableDataDescription.sizePolicy().hasHeightForWidth())
+        self.tableDataDescription.setSizePolicy(sizePolicy)
         self.tableDataDescription.setObjectName("tableDataDescription")
         self.verticalLayout.addWidget(self.tableDataDescription)
 
